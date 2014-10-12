@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-MeetupGoogleCalendar::Application.load_tasks
+MeetupCalendarSync::Application.load_tasks
