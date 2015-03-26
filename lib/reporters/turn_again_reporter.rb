@@ -1,5 +1,21 @@
 module Minitest
   module Reporters
+    # Reporter whose output more closely mimics the format of the turn gem.
+    # Specifically:
+    # 1. The status banner and time on the left, which removes the need to
+    #    limit the length of test names to not risk mis-aligning status flags.
+    # 2. Displays time as minutes:seconds, optionally with hours as well.
+    # 3. Allows configuration of indentation for each test output. Turn uses
+    #    4 spaces, and thus this was chosen as the default.
+    #
+    # Source is mostly a verbatim copy from minitest-reporter's
+    # SpecReporter class. Was unable to simply subclass SpecReporter without
+    # significant code gynmastics or metaprogramming unbecoming of a simple
+    # library formatter. This mostly due to SpecReporter's necessary
+    # calls to super within the #record method, mixed with unavoidable output.
+    #
+    # @see https://github.com/kern/minitest-reporters/blob/master/lib/minitest/reporters/spec_reporter.rb SpecReporter
+    # @see https://github.com/TwP/turn turn
     class TurnAgainReporter < BaseReporter
       include ANSI::Code
       include RelativePosition
