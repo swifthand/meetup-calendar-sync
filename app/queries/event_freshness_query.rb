@@ -32,8 +32,8 @@ class EventFreshnessQuery
     def map_from_events(events)
       events    = [*events]
       existing  = fetch_existing_map(events)
-      events.each.with_object({}) do |event, hash|
-        hash[event] = new(
+      events.each.with_object({}) do |evt, hash|
+        hash[evt] = new(
           id:             evt.meetup_event_id,
           last_update:    evt.meetup_last_update,
           existing_event: existing.fetch(evt.meetup_event_id, nil))
@@ -44,7 +44,7 @@ class EventFreshnessQuery
     # Enumerable#group_by but which assumes only one record per id.
     def fetch_existing_map(events)
       MeetupEvent
-        .where(:meetup_event_id: events.map(&:meetup_event_id))
+        .where(meetup_event_id: events.map(&:meetup_event_id))
         .to_a
         .each.with_object({}) do |evt, hash|
           hash[evt.meetup_event_id] = evt

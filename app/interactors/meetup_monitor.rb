@@ -1,10 +1,10 @@
 class MeetupMonitor
 
-  attr_reader :meetup_client, :results
+  attr_reader :meetup, :results
 
   def initialize(meetup_client: CalSync.meetup_client.new)
-    @meetup_client  = meetup_client
-    @results        = false
+    @meetup   = meetup_client
+    @results  = false
   end
 
   def apply
@@ -16,7 +16,7 @@ private ########################################################################
 
 
   def fetch_events
-    UpcomingEventsQuery.call(client: meetup_client)
+    UpcomingEventsQuery.new(client: meetup).call
   end
 
 

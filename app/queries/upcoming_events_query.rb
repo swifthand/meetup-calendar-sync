@@ -23,19 +23,28 @@ class UpcomingEventsQuery
   end
 
 
-  def events_from_result(result)
-    result_hash = JSON.parse(result)
+  def events_from_result(api_results)
+    result_hash = JSON.parse(api_results)
     result_hash['results'].map do |result|
-      MeetupEvent.from_api_response(result)
-    end
+      if required_attrs?(result)
+        MeetupEvent.from_api_response(result)
+      else
+        nil
+      end
+    end.compact
   end
 
+
+  def required_attrs?(result_hash)
+    result_hash.key?('time')
+  end
 
 private ########################################################################
 
 
   def fetch_events(groups, skip_sleep = false)
     result = [*groups].map do |group|
+      puts "Getting results for group: #{group.name} [#{group.urlname}]"
       events_from_result(
         client.get_path("/2/events", {
           group_urlname:  group.urlname,

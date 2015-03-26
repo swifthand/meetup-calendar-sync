@@ -9,13 +9,19 @@ class MeetupEvent < ActiveRecord::Base
     end
 
     def from_api_response(response)
+      start_time  = LocalTime.convert(response['time'].to_i)
+      end_time    = if response['duration'].blank?
+                      start_time + 2.hours
+                    else
+                      LocalTime.convert(response['time'].to_i + response['duration'].to_i)
+                    end
       self.new(
         meetup_event_id:    response['id'],
         meetup_group_id:    response['group']['id'],
         meetup_last_update: response['updated'],
         name:           response['name'],
-        start_time:     LocalTime.convert(response['time']),
-        end_time:       LocalTime.convert(response['time'] + response['duration']),
+        start_time:     start_time,
+        end_time:       end_time,
         details:        response,
         requires_sync:  true
       )
