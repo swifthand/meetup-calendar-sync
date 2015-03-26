@@ -10,13 +10,14 @@ class MeetupEvent < ActiveRecord::Base
 
     def from_api_response(response)
       self.new(
-        meetup_event_id: response['id'],
-        meetup_group_id: response['group']['id'],
+        meetup_event_id:    response['id'],
+        meetup_group_id:    response['group']['id'],
         meetup_last_update: response['updated'],
-        name:       response['name'],
-        start_time: LocalTime.convert(response['time']),
-        end_time:   LocalTime.convert(response['time'] + response['duration']),
-        details:    response
+        name:           response['name'],
+        start_time:     LocalTime.convert(response['time']),
+        end_time:       LocalTime.convert(response['time'] + response['duration']),
+        details:        response,
+        requires_sync:  true
       )
     end
   end
@@ -28,7 +29,8 @@ class MeetupEvent < ActiveRecord::Base
       name:               another_event.name,
       start_time:         another_event.start_time,
       end_time:           another_event.end_time,
-      details:            another_event.details
+      details:            another_event.details,
+      requires_sync:      true
     )
   end
 

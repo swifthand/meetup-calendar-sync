@@ -5,6 +5,7 @@ class CreateMeetupGroups < ActiveRecord::Migration
       t.string  "name",             null: false
       t.string  "urlname",          null: false
       t.boolean "enable_sync",      null: false, default: true
+      t.string  "tags",             null: false, default: [], array: true
 
       t.timestamps
     end

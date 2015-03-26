@@ -1,0 +1,129 @@
+{
+
+  "results": [
+    {
+      "utc_offset": -21600000,
+      "headcount": 0,
+      "visibility": "public",
+      "waitlist_count": 0,
+      "created": 1391402959000,
+      "maybe_rsvp_count": 0,
+      "description": "<p>Hi ladies,</p> <p>Please join us in working together Saturday afternoon, February 1st. Bring your coding projects and questions. All skill levels welcome! Invite anyone you know who has coding projects or even online learning they would like to do.</p> <p>We are looking to provide a friendly and helpful environment to ladies who code or are learning to code.</p> <p>There will be snacks and drinks =).</p> <p>We will confirm a location as this session approaches, but we will probably meet at either Brightwork or Platform.</p>",
+      "event_url": "http://www.meetup.com/Girls-Coding-Club/events/qbtcthytpbcc/",
+      "yes_rsvp_count": 1,
+      "duration": 10800000,
+      "name": "Let's Code Together!",
+      "id": "qbtcthytpbcc",
+      "time": 1448136000000,
+      "updated": 1391402959000,
+      "group": {
+        "join_mode": "approval",
+        "created": 1382105295000,
+        "name": "Girls Coding Club",
+        "group_lon": -95.38999938964844,
+        "id": 10741142,
+        "urlname": "Girls-Coding-Club",
+        "group_lat": 29.739999771118164,
+        "who": "Coders"
+      },
+      "status": "upcoming"
+    },
+    {
+      "utc_offset": -21600000,
+      "headcount": 0,
+      "visibility": "public",
+      "waitlist_count": 0,
+      "created": 1391402959000,
+      "maybe_rsvp_count": 0,
+      "description": "<p>Hi ladies,</p> <p>Please join us in working together Saturday afternoon, February 1st. Bring your coding projects and questions. All skill levels welcome! Invite anyone you know who has coding projects or even online learning they would like to do.</p> <p>We are looking to provide a friendly and helpful environment to ladies who code or are learning to code.</p> <p>There will be snacks and drinks =).</p> <p>We will confirm a location as this session approaches, but we will probably meet at either Brightwork or Platform.</p>",
+      "event_url": "http://www.meetup.com/Girls-Coding-Club/events/qbtcthytqbhb/",
+      "yes_rsvp_count": 1,
+      "duration": 10800000,
+      "name": "Let's Code Together!",
+      "id": "qbtcthytqbhb",
+      "time": 1449345600000,
+      "updated": 1391402959000,
+      "group": {
+        "join_mode": "approval",
+        "created": 1382105295000,
+        "name": "Girls Coding Club",
+        "group_lon": -95.38999938964844,
+        "id": 10741142,
+        "urlname": "Girls-Coding-Club",
+        "group_lat": 29.739999771118164,
+        "who": "Coders"
+      },
+      "status": "upcoming"
+    },
+    {
+      "utc_offset": -21600000,
+      "headcount": 0,
+      "visibility": "public",
+      "waitlist_count": 0,
+      "created": 1391402959000,
+      "maybe_rsvp_count": 0,
+      "description": "<p>Hi ladies,</p> <p>Please join us in working together Saturday afternoon, February 1st. Bring your coding projects and questions. All skill levels welcome! Invite anyone you know who has coding projects or even online learning they would like to do.</p> <p>We are looking to provide a friendly and helpful environment to ladies who code or are learning to code.</p> <p>There will be snacks and drinks =).</p> <p>We will confirm a location as this session approaches, but we will probably meet at either Brightwork or Platform.</p>",
+      "event_url": "http://www.meetup.com/Girls-Coding-Club/events/qbtcthytqbzb/",
+      "yes_rsvp_count": 1,
+      "duration": 10800000,
+      "name": "Let's Code Together!",
+      "id": "qbtcthytqbzb",
+      "time": 1450555200000,
+      "updated": 1391402959000,
+      "group": {
+        "join_mode": "approval",
+        "created": 1382105295000,
+        "name": "Girls Coding Club",
+        "group_lon": -95.38999938964844,
+        "id": 10741142,
+        "urlname": "Girls-Coding-Club",
+        "group_lat": 29.739999771118164,
+        "who": "Coders"
+      },
+      "status": "upcoming"
+    },
+    {
+      "utc_offset": -21600000,
+      "headcount": 0,
+      "visibility": "public",
+      "waitlist_count": 0,
+      "created": 1391402959000,
+      "maybe_rsvp_count": 0,
+      "description": "<p>Hi ladies,</p> <p>Please join us in working together Saturday afternoon, February 1st. Bring your coding projects and questions. All skill levels welcome! Invite anyone you know who has coding projects or even online learning they would like to do.</p> <p>We are looking to provide a friendly and helpful environment to ladies who code or are learning to code.</p> <p>There will be snacks and drinks =).</p> <p>We will confirm a location as this session approaches, but we will probably meet at either Brightwork or Platform.</p>",
+      "event_url": "http://www.meetup.com/Girls-Coding-Club/events/qbtcthyvcbdb/",
+      "yes_rsvp_count": 1,
+      "duration": 10800000,
+      "name": "Let's Code Together!",
+      "id": "qbtcthyvcbdb",
+      "time": 1451764800000,
+      "updated": 1391402959000,
+      "group": {
+        "join_mode": "approval",
+        "created": 1382105295000,
+        "name": "Girls Coding Club",
+        "group_lon": -95.38999938964844,
+        "id": 10741142,
+        "urlname": "Girls-Coding-Club",
+        "group_lat": 29.739999771118164,
+        "who": "Coders"
+      },
+      "status": "upcoming"
+    }
+  ],
+  "meta": {
+    "next": "https://api.meetup.com/2/events?offset=1&sign=True&format=json&limited_events=False&group_urlname=Girls-Coding-Club&photo-host=public&page=20&fields=&order=time&status=upcoming&desc=false",
+    "method": "Events",
+    "total_count": 25,
+    "link": "https://api.meetup.com/2/events",
+    "count": 20,
+    "description": "Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](/meetup_api/docs/2/open_events).",
+    "lon": "",
+    "title": "Meetup Events v2",
+    "url": "https://api.meetup.com/2/events?offset=0&sign=True&format=json&limited_events=False&group_urlname=Girls-Coding-Club&photo-host=public&page=20&fields=&order=time&status=upcoming&desc=false",
+    "signed_url": "https://api.meetup.com/2/events?offset=0&format=json&limited_events=False&group_urlname=Girls-Coding-Club&photo-host=public&page=20&fields=&order=time&status=upcoming&desc=false&sig_id=49720892&sig=463d277066525510c93f8ddc81456f5d492ebefd",
+    "id": "",
+    "updated": 1426964900000,
+    "lat": ""
+  }
+
+}

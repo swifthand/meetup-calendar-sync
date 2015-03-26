@@ -24,7 +24,7 @@ module Minitest
 
       def initialize(options = {})
         @hours  = !!options.fetch(:hours, false)
-        @indent = options.fetch(:indent, 2)
+        @indent =   options.fetch(:indent, 2)
         super(options)
       end
 

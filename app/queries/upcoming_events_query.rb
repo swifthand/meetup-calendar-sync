@@ -1,18 +1,24 @@
 class UpcomingEventsQuery
 
-  attr_reader :delay, :requests_per_round, :client
+  attr_reader :delay, :chunk_size, :client
 
-  def initialize(delay: 0.5, requests_per_round: 5, client: CalSync.meetup_client.new)
-    @delay = 0.5
-    @requests_per_round = requests_per_round
-    @client = client
+  def initialize( delay:      CalSync.request_delay,
+                  chunk_size: CalSync.requests_per_delay,
+                  client:     CalSync.meetup_client.new )
+    @delay      = delay
+    @chunk_size = chunk_size
+    @client     = client
   end
 
 
   def call(groups: EnabledGroupsQuery.call)
-    [*groups]
-      .each_slice(requests_per_round)
-      .map(&method(:fetch_events))
+    groups = [*groups]
+    groups
+      .each_slice(chunk_size)
+      .map.with_index do |slice, idx|
+        is_last_slice = ((idx + 1) * chunk_size >= groups.count)
+        fetch_events(slice, is_last_slice)
+      end
       .flatten
   end
 
@@ -28,7 +34,7 @@ class UpcomingEventsQuery
 private ########################################################################
 
 
-  def fetch_events(groups)
+  def fetch_events(groups, skip_sleep = false)
     result = [*groups].map do |group|
       events_from_result(
         client.get_path("/2/events", {
@@ -36,7 +42,7 @@ private ########################################################################
           status:         "upcoming"
         }))
     end
-    sleep(delay)
+    sleep(delay) unless skip_sleep
     result
   end
 

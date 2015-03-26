@@ -21,22 +21,17 @@ private ########################################################################
 
 
   def persist_changes(events)
-    events.each do |evt|
-      existing = existing_and_outdated(evt)
-      if existing == nil
+    EventFreshnessQuery.map_from_events(events).each do |evt, query|
+      status, existing_evt = query.call, query.event
+      case status
+      when :new
         evt.save
-      else
-        existing.update_from(evt)
+      when :fresh
+        # Do nothing with an event whose record is still up to date.
+      when :outdated
+        existing_evt.update_from(evt)
       end
     end
-  end
-
-
-  def existing_and_outdated
-    MeetupEvent
-    .where(meetup_event_id: evt.meetup_event_id)
-    .where("meetup_last_update < :last_update", last_update: evt.meetup_last_update)
-    .first
   end
 
 end
