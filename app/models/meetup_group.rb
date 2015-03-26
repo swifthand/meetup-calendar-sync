@@ -3,4 +3,8 @@ class MeetupGroup < ActiveRecord::Base
 
   has_many  :meetup_events, foreign_key: "meetup_group_id"
 
+  def urlname
+    self[:meetup_group_id]
+  end
+
 end
