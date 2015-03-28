@@ -27,3 +27,5 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+gem 'turn-again-reporter', '~> 0.0.1'

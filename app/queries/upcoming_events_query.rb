@@ -44,7 +44,6 @@ private ########################################################################
 
   def fetch_events(groups, skip_sleep = false)
     result = [*groups].map do |group|
-      puts "Getting results for group: #{group.name} [#{group.urlname}]"
       events_from_result(
         client.get_path("/2/events", {
           group_urlname:  group.urlname,

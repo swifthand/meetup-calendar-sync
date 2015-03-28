@@ -2,8 +2,6 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/reporters'
-load 'lib/reporters/turn_again_reporter.rb'
-
 
 Minitest::Reporters.use!(Minitest::Reporters::TurnAgainReporter.new(color: true))
 

@@ -94,6 +94,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    turn-again-reporter (0.0.1)
+      minitest-reporters (~> 1.0, >= 1.0.11)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -112,4 +114,5 @@ DEPENDENCIES
   ruby_meetup2
   sass-rails (~> 4.0.0)
   sdoc
+  turn-again-reporter (~> 0.0.1)
   uglifier (>= 2.5.0)
