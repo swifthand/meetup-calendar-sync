@@ -17,3 +17,4 @@ public/assets/
 .env*
 runic/db/schema.rb
 runic/config/database.yml
+config/client_secrets.json

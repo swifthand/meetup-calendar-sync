@@ -11,21 +11,22 @@ gem 'jquery-rails'
 
 # Infrasutructure Gems
 gem 'pg'
-# gem 'unicorn'
+gem 'unicorn'
 
 # External Service Gems
 gem 'ruby_meetup2'
+gem 'google-api-client'
 
-# Utility Gems
-gem 'awesome_print'
+group :development, :test do
+  gem 'awesome_print'
+end
 
 group :test do
   gem 'minitest-reporters'
+  gem 'turn-again-reporter', '~> 1.0.0'
 end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-gem 'turn-again-reporter', '~> 0.0.1'

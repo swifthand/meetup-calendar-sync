@@ -1,0 +1,3 @@
+class PublishEvents
+  # TODO
+end
