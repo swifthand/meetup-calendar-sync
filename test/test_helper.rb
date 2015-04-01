@@ -2,6 +2,7 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/reporters'
+require 'minitest/reporters/turn_again_reporter'
 
 Minitest::Reporters.use!(Minitest::Reporters::TurnAgainReporter.new(color: true, indent: 2))
 
@@ -12,8 +13,7 @@ class ActiveSupport::TestCase
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
-  fixtures :all
+  # fixtures :all
 
   # Add more helper methods to be used by all tests here...
 end
-

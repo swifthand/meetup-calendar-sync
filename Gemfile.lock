@@ -35,7 +35,15 @@ GEM
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
     awesome_print (1.6.1)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    coderay (1.1.0)
+    debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.2.1)
     extlib (0.9.16)
@@ -86,6 +94,8 @@ GEM
     multi_json (1.11.0)
     multipart-post (2.0.0)
     pg (0.17.1)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -138,7 +148,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
-    turn-again-reporter (1.0.0)
+    turn-again-reporter (1.0.1)
       minitest-reporters (~> 1.0, >= 1.0.8)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -155,14 +165,17 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  better_errors
+  binding_of_caller
   google-api-client
   jquery-rails
   minitest-reporters
   pg
+  quiet_assets
   rails (= 4.1.10)
   ruby_meetup2
   sass-rails (~> 4.0.0)
   sdoc
-  turn-again-reporter (~> 1.0.0)
+  turn-again-reporter (~> 1.0.1)
   uglifier (>= 2.5.0)
   unicorn

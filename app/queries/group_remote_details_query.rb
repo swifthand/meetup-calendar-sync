@@ -43,7 +43,7 @@ private ########################################################################
   def fetch_details(urlname)
     JSON.parse(meetup.get_path("/#{urlname}"))
   rescue RuntimeError => exc
-    if exc.message == "404 Not Found\n"
+    if exc.message =~ /\A404 Not Found/
       :not_found
     else
       raise exc

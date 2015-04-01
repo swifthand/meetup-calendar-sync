@@ -21,9 +21,15 @@ group :development, :test do
   gem 'awesome_print'
 end
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
+end
+
 group :test do
   gem 'minitest-reporters'
-  gem 'turn-again-reporter', '~> 1.0.0'
+  gem 'turn-again-reporter', '~> 1.0.1'
 end
 
 group :doc do

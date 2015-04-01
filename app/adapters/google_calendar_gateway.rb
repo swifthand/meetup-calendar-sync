@@ -17,8 +17,29 @@ module GoogleCalendarGateway
     @calendar_api
   end
 
-  def self.client_auth
-    @client_auth ||= build_client_auth
+  def self.build_credentials(redirect_uri, session)
+    # This will enable a (lazy-loaded) Rails session if not yet accessed.
+    session_hash =
+      if !(Hash === session) and session.respond_to?(:to_hash)
+        session.to_hash
+      elsif !(Hash === session) and session.respond_to?(:to_h)
+        session.to_h
+      else
+        session
+      end
+    auth = api_client.authorization.dup
+    auth.redirect_uri = redirect_uri
+    auth.update_token!(session_hash)
+    auth
+  end
+
+  def self.store_credentials(credentials, session)
+    session.merge!({
+      access_token:   credentials.access_token,
+      refresh_token:  credentials.refresh_token,
+      expires_in:     credentials.expires_in,
+      issued_at:      credentials.issued_at,
+    })
   end
 
 private
@@ -35,13 +56,6 @@ private
 
   def self.build_calendar(client)
     client.discovered_api('calendar', 'v3')
-  end
-
-  def self.build_client_auth
-    auth = api_client.authorization.dup
-    auth.redirect_uri = to('/oauth2callback')
-    auth.update_token!(session)
-    auth
   end
 
 end
