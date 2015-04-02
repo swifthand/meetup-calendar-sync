@@ -6,51 +6,53 @@ module GoogleCalendarGateway
   def self.configure(application_name: , application_version: , oauth2_secrets_file: )
     @api_client   = build_client(application_name, application_version, oauth2_secrets_file)
     @calendar_api = build_calendar(@api_client)
-    @client_auth
+    @configured   = true
   end
 
   def self.api_client
+    ensure_configured!
     @api_client
   end
 
   def self.calendar_api
+    ensure_configured!
     @calendar_api
   end
 
   def self.build_credentials(redirect_uri, session)
-    # This will enable a (lazy-loaded) Rails session if not yet accessed.
-    session_hash =
-      if !(Hash === session) and session.respond_to?(:to_hash)
-        session.to_hash
-      elsif !(Hash === session) and session.respond_to?(:to_h)
-        session.to_h
-      else
-        session
-      end
-    auth = api_client.authorization.dup
-    auth.redirect_uri = redirect_uri
-    auth.update_token!(session_hash)
-    auth
+    ensure_configured!
+    Credentials.new(redirect_uri, session)
   end
 
-  def self.store_credentials(credentials, session)
-    session.merge!({
-      access_token:   credentials.access_token,
-      refresh_token:  credentials.refresh_token,
-      expires_in:     credentials.expires_in,
-      issued_at:      credentials.issued_at,
-    })
+  def self.build_credentials_store
+    ensure_configured!
+    CredentialsRecordStore.new
+    # CredentialsFileStore.new('google_client_secrets.json')
   end
 
 private
 
+  def self.ensure_configured!
+    unless configured?
+      raise "Google API Client not configured at initialization."
+    end
+  end
+
+  def self.configured?
+    !!@configured
+  end
+
+  # Google says that forcing approval prompts every time is a bad idea,
+  # and in the sense of the security goals it probably is!
+  # However, in the the scope of this application it's the best way
+  # to ensure that a lost Refresh Token is recovered without making
+  # the setup needlessly frustrating.
   def self.build_client(app_name, app_version, secrets_file)
-    client = Google::APIClient.new(
-      application_name:     app_name,
-      application_version:  app_version)
-    client_secrets = Google::APIClient::ClientSecrets.load(secrets_file)
-    client.authorization = client_secrets.to_authorization
-    client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
+    client  = Google::APIClient.new(application_name: app_name, application_version: app_version)
+    auth    = Google::APIClient::ClientSecrets.load(secrets_file).to_authorization
+    auth.authorization_uri      = auth.authorization_uri(approval_prompt: :force)
+    client.authorization        = auth
+    client.authorization.scope  = 'https://www.googleapis.com/auth/calendar'
     client
   end
 

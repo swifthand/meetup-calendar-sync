@@ -15,7 +15,7 @@ gem 'unicorn'
 
 # External Service Gems
 gem 'ruby_meetup2'
-gem 'google-api-client'
+gem 'google-api-client', ">= 0.8.5"
 
 group :development, :test do
   gem 'awesome_print'

@@ -45,11 +45,11 @@ GEM
     coderay (1.1.0)
     debug_inspector (0.0.2)
     erubis (2.7.0)
-    execjs (2.2.1)
+    execjs (2.4.0)
     extlib (0.9.16)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    google-api-client (0.8.3)
+    google-api-client (0.8.5)
       activesupport (>= 3.2)
       addressable (~> 2.3)
       autoparse (~> 0.3)
@@ -93,7 +93,7 @@ GEM
       ruby-progressbar
     multi_json (1.11.0)
     multipart-post (2.0.0)
-    pg (0.17.1)
+    pg (0.18.1)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -116,7 +116,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
-    rdoc (4.1.2)
+    rdoc (4.2.0)
       json (~> 1.4)
     retriable (1.4.1)
     ruby-progressbar (1.7.5)
@@ -152,7 +152,7 @@ GEM
       minitest-reporters (~> 1.0, >= 1.0.8)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.5.3)
+    uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unicorn (4.8.3)
@@ -167,7 +167,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
-  google-api-client
+  google-api-client (>= 0.8.5)
   jquery-rails
   minitest-reporters
   pg

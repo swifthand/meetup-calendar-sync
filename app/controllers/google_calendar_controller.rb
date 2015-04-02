@@ -1,16 +1,12 @@
 class GoogleCalendarController < ApplicationController
 
   def request_auth
-    ap credentials
-    ap credentials.authorization_uri.to_s
     redirect_to credentials.authorization_uri.to_s
   end
 
 
   def auth_callback
-    credentials.code = params[:code]
-    credentials.fetch_access_token!
-    GoogleCalendarGateway.store_credentials(credentials, session)
+    credentials.update(params[:code], session)
   end
 
 
