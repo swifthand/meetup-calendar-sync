@@ -60,6 +60,7 @@ private ########################################################################
 
 
     def persist_in_store
+      puts "Persisting Credentials to Storage"
       Google::APIClient::Storage.new(self.store).write_credentials(auth)
     end
 
