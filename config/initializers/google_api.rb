@@ -1,13 +1,10 @@
-GoogleCalendarGateway.configure(
-  application_name:     'Meetup Calendar Sync',
-  application_version:  '0.0.1',
-  oauth2_secrets_file:  'config/google_client_secrets.json'
-)
-
-module Calendar
-
-  def self.event_adapter
-    @event_adapter ||= GoogleCalendarGateway::EventAdapter
-  end
-
+Rails.application.config.after_initialize do
+  Rails.application.reload_routes!
+  redirect_uri =  Rails.application.routes.url_helpers.google_auth_callback_url
+  GoogleCalendarGateway.configure(
+    application_name:     'Meetup Calendar Sync',
+    application_version:  '0.0.1',
+    oauth2_secrets_file:  'config/google_client_secrets.json',
+    default_redirect_uri: redirect_uri
+  )
 end

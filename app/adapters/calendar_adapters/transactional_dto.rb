@@ -46,7 +46,7 @@ module CalendarAdapters
     def initialize(processed: , errors: , **attributes)
       @processed  = !!processed
       @errors     = errors
-      @attributes = attributes.slice(*self.class.attribute_list)
+      @attributes = HashWithIndifferentAccess.new(attributes.slice(*self.class.attribute_list))
     end
 
 
@@ -68,6 +68,11 @@ module CalendarAdapters
 
     def failure?
       errors.any?
+    end
+
+
+    def [](key)
+      attributes[key]
     end
 
 

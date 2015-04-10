@@ -1,1 +1,36 @@
-<%= link_to 'Request Auth', request_google_auth_path %>
+<h1>Meetup Calendar Sync Documentation</h1>
+
+
+
+<% if !page.credentials_exist? %>
+  It looks like you haven't set up a Google Maps
+  <%= link_to 'Request Auth', request_google_auth_path %>
+<% end %>
+
+
+To discuss:
+
+Overview:
+- High-level Concept and Primary Use Case
+- Requires Some Setup
+- Doesn't need to be a rails project but...
+
+Meetup Setup:
+- API Key Settings
+- Adding Groups with a the rake task
+- Fetching Events
+
+Google Calendar Setup:
+- API Key Creation
+- Secrets File &amp; Credentials Setting
+- Authenticating and Selecting Calendars
+- Tags and details on tagging.
+
+
+Code Modifications &amp; Contributions
+- Models not the focus, and are simple or weird.
+- Explain: interactors, requests, queries, registries, view models
+
+
+Metrics:
+- Events Synchronized

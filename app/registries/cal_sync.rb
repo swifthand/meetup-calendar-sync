@@ -12,4 +12,8 @@ module CalSync
     @requests_per_delay ||= 5
   end
 
+  def self.output_event_adapter
+    @event_adapter ||= GoogleCalendarGateway::EventAdapter
+  end
+
 end

@@ -4,18 +4,20 @@ require 'google/api_client/client_secrets'
 module GoogleCalendarGateway
 
   def self.configure( application_name: , application_version: , oauth2_secrets_file: ,
-                      credentials_storage: :database, credentials_key: :not_provided, credentials_path: :not_provided)
+                      credentials_storage: :database, credentials_key: nil, credentials_path: nil,
+                      default_redirect_uri: )
     @api_client   = build_client(application_name, application_version, oauth2_secrets_file)
     @calendar_api = build_calendar(@api_client)
     @oauth2_secrets_file  = oauth2_secrets_file
     @credentials_source   = determine_credentials_source(credentials_storage, credentials_key, credentials_path)
     @configured           = true
+    @default_redirect_uri = default_redirect_uri
   end
 
 
   def self.execute(*args)
     ensure_configured!
-    @api_client.execute(*args)
+    api_client.execute(*args)
   end
 
 
@@ -25,16 +27,27 @@ module GoogleCalendarGateway
   end
 
 
-  def self.build_credentials(from_hash: :not_provided)
+  def self.build_credentials(redirect_uri = default_redirect_uri, from_hash: false)
     ensure_configured!
-    Credentials.new(auth: api_client.authorization.dup, from_hash: from_hash)
+    Credentials.new(
+      auth:         api_client.authorization.dup,
+      redirect_uri: redirect_uri,
+      from_hash:    from_hash,
+      store:        build_credentials_store)
   end
 
 
   def self.build_credentials_store
     ensure_configured!
-    credentials_source[:store].new(location)
+    credentials_source[:store].new(credentials_source[:location])
   end
+
+
+  def self.default_redirect_uri
+    ensure_configured!
+    @default_redirect_uri
+  end
+
 
 private ########################################################################
 
@@ -52,20 +65,32 @@ private ########################################################################
 
 
   def self.determine_credentials_source(storage, key, path)
-    case credential_storage
+    case storage
     when :record, :database
-      path = CredentialsRecordStore::DEFAULT_KEY if key == :not_provided
-      { store: CredentialsRecordStore,  location: key }
+      path = CredentialsRecordStore::DEFAULT_KEY if key.blank?
+      { store: CredentialsRecordStore,
+        location: key
+      }
     when :file, :file_system
-      path = CredentialsFileStore::DEFAULT_PATH if path == :not_provided
-      { store: CredentialsFileStore,    location: path }
+      path = CredentialsFileStore::DEFAULT_PATH if path.blank?
+      { store: CredentialsFileStore,
+        location: path
+      }
     else
-      { store: CredentialsRecordStore,  location: key }
+      { store:    CredentialsRecordStore,
+        location: CredentialsRecordStore::DEFAULT_KEY
+      }
     end
   end
 
+
   def self.credentials_source
     @credentials_source
+  end
+
+
+  def self.api_client
+    @api_client
   end
 
 
@@ -93,11 +118,6 @@ private ########################################################################
 
   def self.build_calendar(client)
     client.discovered_api('calendar', 'v3')
-  end
-
-
-  def self.secrets_from_file(secrets_file)
-
   end
 
 end

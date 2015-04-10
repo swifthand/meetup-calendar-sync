@@ -1,11 +1,12 @@
 class MeetupEvent < ActiveRecord::Base
   self.primary_key = "meetup_event_id"
 
-  belongs_to  :meetup_group, foreign_key: "meetup_group_id"
+  belongs_to  :meetup_group,      foreign_key: "meetup_group_id"
+  has_many    :published_events,  foreign_key: "source_id"
 
   class << self
-    def enabled
-      where(enable_sync: true)
+    def requires_sync
+      where(requires_sync: true)
     end
 
     def from_api_response(response)
@@ -28,6 +29,9 @@ class MeetupEvent < ActiveRecord::Base
     end
   end
 
+  def tags
+    meetup_group.tags
+  end
 
   def update_from(another_event)
     self.update_attributes(
@@ -38,6 +42,10 @@ class MeetupEvent < ActiveRecord::Base
       details:            another_event.details,
       requires_sync:      true
     )
+  end
+
+  def published!
+    update_attributes(requires_sync: false)
   end
 
 

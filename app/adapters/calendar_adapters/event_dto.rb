@@ -10,6 +10,8 @@ module CalendarAdapters
     attribute :group
     attribute :url
     attribute :location
+    attribute :tags
+
     attribute :last_update
   end
 end
