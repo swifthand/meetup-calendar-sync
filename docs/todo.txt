@@ -1,0 +1,112 @@
+[TODO]
+
+
+API:
+Calendar DTO Changes wrt Permissions
+
+
+Views:
+Authorizations#OAuthError
+Calendars#RequiresAuth
+Calendars#ListPage
+Calendars#EditPage
+
+
+{
+           "kind" => "calendar#event",
+           "etag" => "\"2857496895636000\"",
+             "id" => "24l2gvkdorgkou9ccvqrmurmno",
+         "status" => "confirmed",
+       "htmlLink" => "https://www.google.com/calendar/event?eid=MjRsMmd2a2Rvcmdrb3U5Y2N2cXJtdXJtbm8gZHQ5NGVmdGhkZGs3N2ZlNXY0bDU1anEyMzRAZw",
+        "created" => "2015-04-11T10:34:07.000Z",
+        "updated" => "2015-04-11T10:34:07.818Z",
+        "summary" => "Monthly meetup - TBD",
+    "description" => "<p>The monthly meeting. Topic TBD</p>",
+       "location" => "START houston, 1121 Delano Street, Houston, TX 77003",
+        "creator" => {
+              "email" => "paul@groupraise.com",
+        "displayName" => "Paul Kwiatkowski"
+    },
+      "organizer" => {
+              "email" => "dt94efthddk77fe5v4l55jq234@group.calendar.google.com",
+        "displayName" => "Hawthorne Haus",
+               "self" => true
+    },
+          "start" => {
+        "dateTime" => "2016-03-24T19:00:00-05:00"
+    },
+            "end" => {
+        "dateTime" => "2016-03-24T21:00:00-05:00"
+    },
+        "iCalUID" => "24l2gvkdorgkou9ccvqrmurmno@google.com",
+       "sequence" => 0,
+    "hangoutLink" => "https://plus.google.com/hangouts/_/calendar/ZHQ5NGVmdGhkZGs3N2ZlNXY0bDU1anEyMzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ.24l2gvkdorgkou9ccvqrmurmno",
+      "reminders" => {
+        "useDefault" => true
+    },
+         "source" => {
+          "url" => "http://www.meetup.com/Clojure-Houston-User-Group/events/dsrlxdyvfbgc/",
+        "title" => ""
+    }
+}
+
+
+
+
+
+
+{
+     "destination_id" => "24l2gvkdorgkou9ccvqrmurmno",
+        "calendar_id" => "dt94efthddk77fe5v4l55jq234@group.calendar.google.com",
+         "start_time" => "2016-03-24T19:00:00-05:00",
+           "end_time" => "2016-03-24T21:00:00-05:00",
+            "all_day" => false,
+               "name" => "Monthly meetup - TBD",
+        "description" => "<p>The monthly meeting. Topic TBD</p>",
+              "group" => "Clojure Houston User Group",
+         "source_url" => "http://www.meetup.com/Clojure-Houston-User-Group/events/dsrlxdyvfbgc/",
+    "destination_url" => "https://www.google.com/calendar/event?eid=MjRsMmd2a2Rvcmdrb3U5Y2N2cXJtdXJtbm8gZHQ5NGVmdGhkZGs3N2ZlNXY0bDU1anEyMzRAZw",
+           "location" => "START houston, 1121 Delano Street, Houston, TX 77003",
+               "tags" => [],
+        "last_update" => "2015-04-11T10:34:07.818Z",
+
+
+
+            "details" => {
+               "kind" => "calendar#event",
+               "etag" => "\"2857496895636000\"",
+                 "id" => "24l2gvkdorgkou9ccvqrmurmno",
+             "status" => "confirmed",
+           "htmlLink" => "https://www.google.com/calendar/event?eid=MjRsMmd2a2Rvcmdrb3U5Y2N2cXJtdXJtbm8gZHQ5NGVmdGhkZGs3N2ZlNXY0bDU1anEyMzRAZw",
+            "created" => "2015-04-11T10:34:07.000Z",
+            "updated" => "2015-04-11T10:34:07.818Z",
+            "summary" => "Monthly meetup - TBD",
+        "description" => "<p>The monthly meeting. Topic TBD</p>",
+           "location" => "START houston, 1121 Delano Street, Houston, TX 77003",
+            "creator" => {
+                  "email" => "paul@groupraise.com",
+            "displayName" => "Paul Kwiatkowski"
+        },
+          "organizer" => {
+                  "email" => "dt94efthddk77fe5v4l55jq234@group.calendar.google.com",
+            "displayName" => "Hawthorne Haus",
+                   "self" => true
+        },
+              "start" => {
+            "dateTime" => "2016-03-24T19:00:00-05:00"
+        },
+                "end" => {
+            "dateTime" => "2016-03-24T21:00:00-05:00"
+        },
+            "iCalUID" => "24l2gvkdorgkou9ccvqrmurmno@google.com",
+           "sequence" => 0,
+        "hangoutLink" => "https://plus.google.com/hangouts/_/calendar/ZHQ5NGVmdGhkZGs3N2ZlNXY0bDU1anEyMzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ.24l2gvkdorgkou9ccvqrmurmno",
+          "reminders" => {
+            "useDefault" => true
+        },
+             "source" => {
+              "url" => "http://www.meetup.com/Clojure-Houston-User-Group/events/dsrlxdyvfbgc/",
+            "title" => ""
+        }
+    }
+}

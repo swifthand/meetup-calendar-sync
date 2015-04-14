@@ -1,11 +1,11 @@
-<%= link_to 'Edit Selected Calendars' %>
+<%= link_to 'Edit Selected Calendars', edit_google_calendars_path %>
 
 <h2>Selected Google Calendars</h2>
 <% @page.selected_calendars.each do |cal| %>
   <div>
     <strong><%= cal['name'] %></strong>
     <% if cal['tags'].present? %>
-      <em>(<% cal['tags'].join(', ') %>)</em>
+      <em>(<%= cal['tags'].join(', ') %>)</em>
     <% else %>
       (no tags)
     <% end %>

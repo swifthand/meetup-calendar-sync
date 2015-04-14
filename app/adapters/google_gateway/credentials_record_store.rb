@@ -1,4 +1,4 @@
-module GoogleCalendarGateway
+module GoogleGateway
   class CredentialsRecordStore
 
     DEFAULT_KEY = 'google_calendar_credentials'
@@ -24,6 +24,7 @@ private ########################################################################
     attr_reader :record
 
     def fetch_record(key)
+      # TODO: Less coupled to Settings Record?
       result = Setting.where(key: (key || DEFAULT_KEY)).first_or_initialize
     end
 

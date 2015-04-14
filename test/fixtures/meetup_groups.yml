@@ -4,3 +4,10 @@ houston_ruby:
   urlname: "HoustonRuby"
   enable_sync: true
   tags: []
+
+houston_clojure:
+  meetup_group_id: '5634432'
+  name: Clojure Houston User Group
+  urlname: Clojure-Houston-User-Group
+  enable_sync: true
+  tags: []

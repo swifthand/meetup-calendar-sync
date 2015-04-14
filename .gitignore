@@ -18,3 +18,4 @@ public/assets/
 runic/db/schema.rb
 runic/config/database.yml
 config/*_secrets.json
+config/google_client_refresh.json

@@ -1,9 +1,9 @@
-module GoogleCalendarGateway
+module GoogleGateway
   class Credentials
 
     attr_reader :store, :auth
 
-    def initialize(auth: , redirect_uri: , from_hash: :not_provided, store: GoogleCalendarGateway.build_credentials_store)
+    def initialize(auth: , redirect_uri: , from_hash: :not_provided, store: GoogleGateway.build_credentials_store)
       @store  = store
       refresh = determine_refresh(from_hash, store)
       @auth   = augment_auth(auth, redirect_uri, refresh)
@@ -38,10 +38,8 @@ private ########################################################################
       auth.redirect_uri = redirect_uri
       if refresh.present?
         auth.update_token!(refresh)
-        puts "Token updated!"
         if auth.expires_at.blank? or Time.now.to_i >= auth.expires_at
           auth.refresh!
-          puts "Re-authorizing... #{auth.expired?}"
         end
       end
       auth

@@ -91,5 +91,12 @@ module CalendarAdapters
       end
     end
 
+
+    def ==(other_dto)
+      self.attributes == other_dto.attributes &&
+      self.processed? == other_dto.processed? &&
+      self.errors     == other_dto.errors
+    end
+
   end
 end

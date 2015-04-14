@@ -1,4 +1,4 @@
-module GoogleCalendarGateway
+module GoogleGateway
   class CalendarListQuery
 
     attr_reader :auth
@@ -12,7 +12,7 @@ module GoogleCalendarGateway
     end
 
     def writable
-      call.select { |cal| cal.access_role == 'owner' or cal.access_role == 'writer' }
+      call.select(&:write_access)
     end
 
   end

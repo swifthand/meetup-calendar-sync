@@ -1,0 +1,18 @@
+<h1>Select Google Calendars as Sync Targets</h1>
+
+<%= form_for 'google_calendars', url: update_google_calendars_path do |f| %>
+
+  <% @page.discovered_calendars.each.with_index do |gcal, idx| %>
+    <div class="discovered-calendar">
+      <p><strong><%= gcal.summary %></strong> (<%= gcal.id %>)</p>
+      <p><%= gcal.description %></p>
+      <%= hidden_field_tag "google_calendars[#{idx}][name]", gcal.summary %>
+      <%= hidden_field_tag "google_calendars[#{idx}][id]", gcal.id %>
+      <%= hidden_field_tag "google_calendars[#{idx}][selected]", false %>
+      <%= check_box_tag "google_calendars[#{idx}][selected]", true, page.selected?(gcal) %>
+      <%= text_field_tag "google_calendars[#{idx}][tags]", page.tag_text_for(gcal) %>
+    </div>
+  <% end -%>
+
+  <p class="button"><%= f.submit 'Set Selected Calendars' %></p>
+<% end %>

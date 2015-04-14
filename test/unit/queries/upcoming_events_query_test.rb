@@ -50,31 +50,29 @@ class UpcomingEventsQueryTest < ActiveSupport::TestCase
 
 
   test "sleeps between chunks" do
-    query = UpcomingEventsQuery.new(
-      delay:      0.25,
-      chunk_size: 2,
-      client:     mock_client)
-    four_groups = [MeetupGroup.new, MeetupGroup.new, MeetupGroup.new, MeetupGroup.new]
-    t0 = Time.now
-    query.(groups: four_groups)
-    elapsed = Time.now - t0
-    # elapsed should be between 0.25 and 0.50 unless the query call to a mock client
-    # somehow took over 0.25s, which is likely a transient fluke of the test env.
-    assert(0.25 < elapsed, "Time elapsed seems to indicate improper sleeping.")
-    assert(elapsed < 0.50, "Time elapsed seems to indicate improper sleeping.")
+    CalSync.override_env(meetup_query_rate: [2, per: 0.25]) do
+      query = UpcomingEventsQuery.new(client: mock_client)
+      four_groups = [MeetupGroup.new, MeetupGroup.new, MeetupGroup.new, MeetupGroup.new]
+      t0 = Time.now
+      query.(groups: four_groups)
+      elapsed = Time.now - t0
+      # elapsed should be between 0.25 and 0.50 unless the query call to a mock client
+      # somehow took over 0.25s, which is likely a transient fluke of the test env.
+      assert(0.25 < elapsed, "Time elapsed seems to indicate improper sleeping.")
+      assert(elapsed < 0.50, "Time elapsed seems to indicate improper sleeping.")
+    end
   end
 
 
   test "does not sleep if groups fit in one chunk" do
-    query = UpcomingEventsQuery.new(
-      delay:      1,
-      chunk_size: 5,
-      client:     mock_client)
-    four_groups = [MeetupGroup.new, MeetupGroup.new, MeetupGroup.new, MeetupGroup.new]
-    t0 = Time.now
-    query.(groups: four_groups)
-    elapsed = Time.now - t0
-    assert(elapsed < 1.0, "Time elapsed seems to indicate the query slept when it should not have.")
+    CalSync.override_env(meetup_query_rate: [5, per: 1]) do
+      query = UpcomingEventsQuery.new(client: mock_client)
+      four_groups = [MeetupGroup.new, MeetupGroup.new, MeetupGroup.new, MeetupGroup.new]
+      t0 = Time.now
+      query.(groups: four_groups)
+      elapsed = Time.now - t0
+      assert(elapsed < 1.0, "Time elapsed seems to indicate the query slept when it should not have.")
+    end
   end
 
 

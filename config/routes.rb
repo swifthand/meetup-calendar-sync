@@ -1,20 +1,23 @@
 MeetupCalendarSync::Application.routes.draw do
 
-  get   'gcal/request_auth',
-        :to => 'google_calendar#request_auth',
+  scope :module => 'google_gateway' do
+    get 'google/request_auth',
+        :to => 'authorizations#create',
         :as => 'request_google_auth'
-  get   'gcal/auth_callback',
-        :to => 'google_calendar#auth_callback',
+    get 'google/auth_callback',
+        :to => 'authorizations#callback',
         :as => 'google_auth_callback'
-  get   'gcal',
-        :to => 'google_calendar#index',
-        :as => 'gcal'
-  get   'gcal/edit',
-        :to => 'google_calendar#edit',
-        :as => 'edit_gcal'
-  post  'gcal',
-        :to => 'google_calendar#select_gcals',
-        :as => 'update_gcal'
+
+    get   'google/calendars',
+          :to => 'calendars#index',
+          :as => 'google_calendars'
+    get   'google/calendars/edit',
+          :to => 'calendars#edit',
+          :as => 'edit_google_calendars'
+    post  'google/calendars',
+          :to => 'calendars#update',
+          :as => 'update_google_calendars'
+  end
 
   root 'root#index'
 

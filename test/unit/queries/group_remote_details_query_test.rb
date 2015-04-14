@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class GroupRemoteDetailsQueryTest < ActiveSupport::TestCase
-
   fixtures :meetup_groups
 
   # The only method we need to mock out is get_path

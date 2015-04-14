@@ -2,7 +2,7 @@ class GroupRemoteDetailsQuery
 
   def self.batch_as_entities(*urlnames, client: CalSync.meetup_client.new)
     urlnames = [*urlnames].flatten
-    urlnames.map do |urlname|
+    urlnames.map.rate_limit(*CalSync.meetup_query_rate) do |urlname|
       new(urlname).as_entity
     end
   end

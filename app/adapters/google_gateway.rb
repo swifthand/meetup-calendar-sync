@@ -1,13 +1,12 @@
 require 'google/api_client'
 require 'google/api_client/client_secrets'
 
-module GoogleCalendarGateway
+module GoogleGateway
 
   def self.configure( application_name: , application_version: , oauth2_secrets_file: ,
                       credentials_storage: :database, credentials_key: nil, credentials_path: nil,
                       default_redirect_uri: )
     @api_client   = build_client(application_name, application_version, oauth2_secrets_file)
-    @calendar_api = build_calendar(@api_client)
     @oauth2_secrets_file  = oauth2_secrets_file
     @credentials_source   = determine_credentials_source(credentials_storage, credentials_key, credentials_path)
     @configured           = true
@@ -15,20 +14,21 @@ module GoogleCalendarGateway
   end
 
 
-  def self.execute(*args)
+  def self.execute(*args, **kwargs)
     ensure_configured!
-    api_client.execute(*args)
+    api_client.execute(*args, **kwargs)
   end
 
 
   def self.calendar_api
     ensure_configured!
-    @calendar_api
+    @calendar_api ||= build_calendar(@api_client)
   end
 
 
   def self.build_credentials(redirect_uri = default_redirect_uri, from_hash: false)
     ensure_configured!
+    calendar_api # Trigger discovery in case we haven't yet. Otherwise is a no-op.
     Credentials.new(
       auth:         api_client.authorization.dup,
       redirect_uri: redirect_uri,

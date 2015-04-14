@@ -1,0 +1,6 @@
+clojure_needs_sync_update:
+  source_id: dsrlxdytlbkc
+  destination_id: 24l2gvkdorgkou9ccvqrmurmno
+  type: 'GoogleGateway::PublishedEvent'
+  details:
+    calendar_id: <%= ENV['TEST_GOOGLE_CALENDAR_ID'] %>

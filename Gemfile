@@ -17,6 +17,8 @@ gem 'unicorn'
 gem 'ruby_meetup2'
 gem 'google-api-client', ">= 0.8.5"
 
+gem 'immutable_struct'
+
 group :development, :test do
   gem 'awesome_print'
 end

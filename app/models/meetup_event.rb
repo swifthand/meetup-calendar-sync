@@ -16,17 +16,19 @@ class MeetupEvent < ActiveRecord::Base
                     else
                       LocalTime.convert(response['time'].to_i + response['duration'].to_i)
                     end
-      self.new(
+      result = self.new(
         meetup_event_id:    response['id'],
         meetup_group_id:    response['group']['id'],
-        meetup_last_update: response['updated'],
+        meetup_last_update: response['updated'].to_i,
         name:           response['name'],
         start_time:     start_time,
         end_time:       end_time,
         details:        response,
         requires_sync:  true
       )
+      result
     end
+
   end
 
   def tags
@@ -48,5 +50,39 @@ class MeetupEvent < ActiveRecord::Base
     update_attributes(requires_sync: false)
   end
 
+
+  def group_name
+    details.fetch('group', {}).fetch('name', '')
+  end
+
+
+  def url
+    details.fetch('event_url', '')
+  end
+
+
+  def last_update
+    LocalTime.convert(meetup_last_update)
+  end
+
+
+  def location_string
+    location = details.fetch('venue', {})
+    str  = "#{location['address_1']} #{location['address_2']}"
+    str << ", #{location['city']}" if location['city'].present?
+    str << ", #{location['state']}" if location['state'].present?
+    str << " #{location['zip']}"
+    str  = "#{location['name']}, #{str}" if location['name'].present?
+    str.gsub(/\s+/, ' ').gsub(/\s\,/, ',')
+  end
+
+
+  def method_missing(msg, *args, &block)
+    if self[:details].key?(msg.to_s)
+      result = self[:details][msg.to_s]
+    else
+      super
+    end
+  end
 
 end

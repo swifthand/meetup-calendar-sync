@@ -8,12 +8,31 @@ Minitest::Reporters.use!(Minitest::Reporters::TurnAgainReporter.new(color: true,
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
+  self.use_transactional_fixtures = true
 
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  #
-  # Note: You'll currently still have to declare fixtures explicitly in integration tests
-  # -- they do not yet inherit this setting
-  # fixtures :all
+  def stub_query(superclass = Object, callable)
+    StubQuery.new(superclass, callable)
+  end
 
-  # Add more helper methods to be used by all tests here...
+
+  class StubQuery
+    def self.new(superclass = Object, callable)
+      query = Class.new(superclass) do
+        def initialize(*args, &block); end
+        def call(*args, &block)
+          self.class.mock_result.call(*args, &block)
+        end
+      end
+
+      query.instance_exec(callable) do |mock_result|
+        @mock_result = mock_result
+        def mock_result
+          @mock_result
+        end
+      end
+
+      query
+    end
+  end
+
 end
